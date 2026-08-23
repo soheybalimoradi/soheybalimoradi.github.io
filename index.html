@@ -3,13 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Smith</title>
+
+    <title>Soheyb Alimoradi | Computer Engineering</title>
+
+    <meta name="description" content="Personal website of Soheyb Alimoradi, Bachelor's student in Computer Engineering at the University of Kurdistan.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #fafafa;
+            color: #222;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        header {
+            padding: 32px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .name {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #555;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            color: #111;
+        }
+
+        main {
+            padding: 90px 0 100px;
+        }
+
+        .intro {
+            max-width: 720px;
+        }
+
+        .intro h1 {
+            margin: 0 0 20px;
+            font-size: clamp(2.6rem, 7vw, 4.5rem);
+            line-height: 1.05;
+            letter-spacing: -0.045em;
+            font-weight: 650;
+        }
+
+        .subtitle {
+            margin: 0 0 28px;
+            font-size: 1.25rem;
+            color: #555;
+        }
+
+        .description {
+            max-width: 650px;
+            margin: 0;
+            font-size: 1.05rem;
+            color: #444;
+        }
+
+        section {
+            margin-top: 90px;
+        }
+
+        section h2 {
+            margin: 0 0 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        .currently {
+            max-width: 650px;
+            font-size: 1.05rem;
+        }
+
+        footer {
+            padding: 30px 0 50px;
+            border-top: 1px solid #e5e5e5;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 700px) {
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            nav {
+                gap: 16px;
+            }
+
+            main {
+                padding-top: 60px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <h1>Alex Smith</h1>
-    <p>Master's Student in Computer Engineering</p>
-    <p>University of MAOK</p>
+<header>
+    <div class="container header-inner">
+
+        <p class="name">Alex Smith</p>
+
+        <nav>
+            <a href="#">About</a>
+            <a href="#">Academic</a>
+            <a href="#">Projects</a>
+            <a href="#">Writing</a>
+            <a href="#">Photos</a>
+            <a href="#">Contact</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+    <div class="container">
+
+        <div class="intro">
+
+            <h1>Soheyb Alimoradi</h1>
+
+            <p class="subtitle">
+                Bachelor's Student in Computer Engineering
+                · University of Kurdistan
+            </p>
+
+            <p class="description">
+                I am a Bachelor's student in Computer Engineering with an
+                interest in artificial intelligence. This website is a
+                collection of my academic background, projects, writing,
+                and a little about me.
+            </p>
+
+        </div>
+
+        <section>
+            <h2>Currently</h2>
+
+            <p class="currently">
+                I am currently pursuing my Bachelor's degree in Computer
+                Engineering at the University of Kurdistan, exploring
+                artificial intelligence and related areas of computing.
+            </p>
+        </section>
+
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        © 2026 Soheyb Alimoradi
+    </div>
+</footer>
 
 </body>
 </html>
