@@ -196,3 +196,103 @@ footer {
         margin-bottom: 52px;
     }
 }
+
+/* =========================
+   Photos
+   ========================= */
+
+.page-intro {
+    max-width: var(--content-width);
+    margin-bottom: 42px;
+}
+
+.page-intro h1 {
+    margin-bottom: 14px;
+}
+
+.page-intro p {
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+
+/* Masonry-style photo gallery */
+
+.photo-gallery {
+    column-count: 3;
+    column-gap: 24px;
+}
+
+
+/* Individual photo */
+
+.photo-item {
+    margin: 0 0 30px;
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
+}
+
+
+/* Location shown before each photograph */
+
+.photo-location {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+
+/* Photograph */
+
+.photo-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    border-radius: 6px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* Small interaction when hovering */
+
+.photo-item img:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+}
+
+
+/* Tablet */
+
+@media (max-width: 800px) {
+
+    .photo-gallery {
+        column-count: 2;
+        column-gap: 20px;
+    }
+
+}
+
+
+/* Phone */
+
+@media (max-width: 520px) {
+
+    .photo-gallery {
+        column-count: 1;
+    }
+
+    .photo-item {
+        margin-bottom: 26px;
+    }
+
+    .photo-location {
+        font-size: 0.88rem;
+    }
+
+}
