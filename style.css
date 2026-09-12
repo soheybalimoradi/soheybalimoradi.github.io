@@ -73,7 +73,7 @@ a:focus-visible {
 }
 
 
-main.container {
+main {
     min-height: 70vh;
 }
 
@@ -82,13 +82,22 @@ main.container {
    Header
    ========================= */
 
-.site-header {
+/*
+   These styles support both:
+   <header class="site-header">
+   and the simpler:
+   <header>
+*/
+
+.site-header,
+header {
     border-bottom: 1px solid var(--border);
     background: var(--background);
 }
 
 
-.header-inner {
+.header-inner,
+header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -97,15 +106,18 @@ main.container {
 }
 
 
-.site-name {
+.site-name,
+.site-title {
     flex-shrink: 0;
+    color: var(--text);
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
 
 
-.site-nav {
+.site-nav,
+nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
@@ -113,7 +125,8 @@ main.container {
 }
 
 
-.site-nav a {
+.site-nav a,
+nav a {
     position: relative;
     color: var(--muted);
     font-size: 0.9rem;
@@ -122,12 +135,15 @@ main.container {
 
 
 .site-nav a:hover,
-.site-nav a.active {
+.site-nav a.active,
+nav a:hover,
+nav a.active {
     color: var(--text);
 }
 
 
-.site-nav a.active {
+.site-nav a.active,
+nav a.active {
     font-weight: 600;
 }
 
@@ -339,7 +355,7 @@ p {
 
 
 /* =========================
-   About and academic pages
+   About and Academic pages
    ========================= */
 
 .content-page {
@@ -479,37 +495,46 @@ p {
 }
 
 
-/* Responsive photo grid */
+/* Harmonized photo grid */
 
 .photo-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
-    align-items: start;
+    align-items: stretch;
 }
 
 
+/*
+   Each image receives the same frame.
+   This makes portrait and landscape photos
+   appear balanced in the gallery.
+*/
+
 .photo-item {
     min-width: 0;
+    aspect-ratio: 4 / 5;
     margin: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background: var(--surface);
 }
 
 
 .photo-item img {
     display: block;
     width: 100%;
-    height: auto;
-    border-radius: 7px;
-    background: var(--surface);
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 
-.photo-item img:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+.photo-item:hover img {
+    transform: scale(1.025);
 }
 
 
@@ -563,7 +588,8 @@ p {
    Footer
    ========================= */
 
-.site-footer {
+.site-footer,
+footer {
     margin-top: 60px;
     border-top: 1px solid var(--border);
 }
@@ -578,7 +604,8 @@ p {
 }
 
 
-.footer-inner p {
+.footer-inner p,
+footer p {
     margin: 0;
     font-size: 0.82rem;
 }
@@ -640,14 +667,16 @@ p {
 
 @media (max-width: 700px) {
 
-    .header-inner {
+    .header-inner,
+    header {
         align-items: flex-start;
         flex-direction: column;
         justify-content: center;
         padding: 20px 0;
     }
 
-    .site-nav {
+    .site-nav,
+    nav {
         justify-content: flex-start;
         gap: 16px;
     }
@@ -707,11 +736,13 @@ p {
         );
     }
 
-    .site-nav {
+    .site-nav,
+    nav {
         gap: 13px;
     }
 
-    .site-nav a {
+    .site-nav a,
+    nav a {
         font-size: 0.82rem;
     }
 
