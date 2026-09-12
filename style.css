@@ -411,3 +411,37 @@ footer {
     }
 
 }
+
+.home-intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: 64px;
+    align-items: center;
+    padding: 100px 0 110px;
+}
+
+.home-photo {
+    width: 100%;
+    max-width: 260px;
+    justify-self: end;
+}
+
+.home-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+    .home-intro {
+        grid-template-columns: 1fr;
+        gap: 42px;
+        padding: 70px 0 80px;
+    }
+
+    .home-photo {
+        max-width: 230px;
+        justify-self: start;
+    }
+}
