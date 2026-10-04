@@ -1,14 +1,20 @@
+```css
 /* =========================
    Global styles
    ========================= */
 
 :root {
-    --background: #fafafa;
+    --background: #f8f9fb;
     --surface: #ffffff;
-    --text: #222222;
-    --muted: #666666;
-    --border: #e5e5e5;
-    --accent: #333333;
+    --surface-soft: #f1f4f8;
+
+    --text: #1d232c;
+    --muted: #667085;
+    --border: #e2e6ec;
+
+    --accent: #496a8f;
+    --accent-dark: #365575;
+    --accent-soft: #e9f0f7;
 
     --max-width: 900px;
     --content-width: 700px;
@@ -49,8 +55,13 @@ a {
 }
 
 a:focus-visible {
-    outline: 2px solid var(--text);
+    outline: 2px solid var(--accent);
     outline-offset: 4px;
+}
+
+::selection {
+    background: var(--accent-soft);
+    color: var(--accent-dark);
 }
 
 .container {
@@ -62,6 +73,7 @@ main {
     min-height: 70vh;
 }
 
+
 /* =========================
    Header
    ========================= */
@@ -69,7 +81,7 @@ main {
 .site-header,
 header {
     border-bottom: 1px solid var(--border);
-    background: var(--background);
+    background: rgba(248, 249, 251, 0.94);
 }
 
 .header-inner,
@@ -88,6 +100,12 @@ header {
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
+    transition: color 0.2s ease;
+}
+
+.site-name:hover,
+.site-title:hover {
+    color: var(--accent);
 }
 
 .site-nav,
@@ -108,6 +126,22 @@ nav a {
         opacity 0.2s ease;
 }
 
+.site-nav a::after,
+nav a::after {
+    position: absolute;
+    right: 0;
+    bottom: -7px;
+    left: 0;
+    height: 1px;
+    background: var(--accent);
+    content: "";
+    opacity: 0;
+    transform: scaleX(0.5);
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
 .site-nav a:hover,
 .site-nav a.active,
 nav a:hover,
@@ -115,10 +149,19 @@ nav a.active {
     color: var(--text);
 }
 
+.site-nav a:hover::after,
+.site-nav a.active::after,
+nav a:hover::after,
+nav a.active::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
 .site-nav a.active,
 nav a.active {
     font-weight: 600;
 }
+
 
 /* =========================
    Typography
@@ -160,13 +203,23 @@ p {
 }
 
 .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     margin-bottom: 24px;
-    color: var(--muted);
+    color: var(--accent);
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.12em;
     line-height: 1.5;
     text-transform: uppercase;
+}
+
+.eyebrow::before {
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    content: "";
 }
 
 .page-intro {
@@ -185,16 +238,36 @@ p {
     font-size: 1.05rem;
 }
 
+
 /* =========================
-   Home page
+   Homepage
    ========================= */
 
 .home-intro {
+    position: relative;
+
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 190px;
-    gap: 48px;
+    grid-template-columns: minmax(0, 1fr) 270px;
+
+    gap: 64px;
     align-items: center;
-    padding: 80px 0 90px;
+
+    margin-top: 20px;
+    padding: 88px 0 100px;
+}
+
+.home-intro::before {
+    position: absolute;
+    top: 38px;
+    right: -80px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    content: "";
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: -1;
 }
 
 .home-text {
@@ -202,6 +275,7 @@ p {
 }
 
 .home-text h1 {
+    max-width: 620px;
     margin-bottom: 24px;
 }
 
@@ -214,58 +288,152 @@ p {
 .home-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
-    margin-top: 28px;
+    gap: 14px;
+    margin-top: 32px;
 }
 
 .text-link {
-    display: inline-block;
-    border-bottom: 1px solid var(--text);
-    padding-bottom: 3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    border: 1px solid var(--border);
+    border-radius: 999px;
+
+    padding: 9px 16px;
+
+    background: var(--surface);
     color: var(--text);
-    font-size: 0.92rem;
+
+    font-size: 0.9rem;
     font-weight: 600;
+
+    box-shadow: 0 1px 2px rgba(20, 30, 40, 0.03);
+
     transition:
-        opacity 0.2s ease,
-        border-color 0.2s ease;
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.text-link::after {
+    content: "↗";
+    color: var(--accent);
+    font-size: 0.85rem;
+    transition: transform 0.2s ease;
 }
 
 .text-link:hover {
-    opacity: 0.6;
+    border-color: var(--accent);
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    transform: translateY(-2px);
 }
 
+.text-link:hover::after {
+    transform: translate(2px, -2px);
+}
+
+
+/* Larger homepage photo */
+
 .home-photo {
-    width: 190px;
-    height: 245px;
+    position: relative;
+
+    width: 270px;
+    height: 350px;
+
     justify-self: end;
+
     overflow: hidden;
-    border-radius: 8px;
+
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
     background: var(--surface);
+
+    box-shadow:
+        0 18px 45px rgba(30, 45, 65, 0.10),
+        0 3px 10px rgba(30, 45, 65, 0.05);
+}
+
+.home-photo::after {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    content: "";
+    opacity: 0;
+    transform: scale(0.8);
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+}
+
+.home-photo:hover::after {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .home-photo img {
     display: block;
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     object-position: center;
+
+    transition: transform 0.45s ease;
 }
+
+.home-photo:hover img {
+    transform: scale(1.025);
+}
+
+
+/* Homepage sections */
 
 .home-section {
     display: grid;
     grid-template-columns: 180px minmax(0, 1fr);
+
     gap: 40px;
+
     border-top: 1px solid var(--border);
-    padding: 54px 0;
+
+    padding: 58px 0;
 }
 
 .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
     margin: 0;
-    color: var(--text);
+
+    color: var(--accent);
+
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.12em;
+
     text-transform: uppercase;
+}
+
+.section-label::before {
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    content: "";
 }
 
 .home-section-content {
@@ -280,6 +448,9 @@ p {
     margin-bottom: 0;
 }
 
+
+/* Interest tags */
+
 .interest-list {
     display: flex;
     flex-wrap: wrap;
@@ -287,17 +458,37 @@ p {
 }
 
 .interest-list span {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+
     border: 1px solid var(--border);
     border-radius: 999px;
+
     padding: 8px 14px;
+
     background: var(--surface);
+
     color: var(--muted);
+
     font-size: 0.9rem;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
+.interest-list span:hover {
+    border-color: #c7d5e3;
+    background: var(--accent-soft);
+    color: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+
 /* =========================
-   About and academic pages
+   About / Academic pages
    ========================= */
 
 .content-page {
@@ -352,8 +543,11 @@ p {
 .timeline-item {
     display: grid;
     grid-template-columns: 150px minmax(0, 1fr);
+
     gap: 30px;
+
     border-top: 1px solid var(--border);
+
     padding: 28px 0;
 }
 
@@ -375,22 +569,10 @@ p {
     margin-bottom: 0;
 }
 
+
 /* =========================
    Photo gallery
    ========================= */
-
-/*
-   Each gallery section contains:
-
-   <section class="photo-section">
-       <div class="photo-section-heading">...</div>
-       <div class="photo-grid">
-           <figure class="photo-item">
-               <img src="..." alt="...">
-           </figure>
-       </div>
-   </section>
-*/
 
 .photo-section {
     margin-top: 76px;
@@ -402,77 +584,99 @@ p {
 
 .photo-section-heading {
     margin-bottom: 26px;
-    border-left: 3px solid var(--text);
+
+    border-left: 3px solid var(--accent);
+
     padding-left: 18px;
 }
 
 .photo-section-label {
     margin: 0 0 8px;
-    color: var(--muted);
+
+    color: var(--accent);
+
     font-size: 0.75rem;
     font-weight: 600;
+
     letter-spacing: 0.14em;
+
     text-transform: uppercase;
 }
 
 .photo-section-heading h2 {
     margin: 0;
+
     color: var(--text);
+
     font-size: 1.55rem;
     font-weight: 700;
+
     letter-spacing: -0.02em;
 }
 
 .photo-section-location {
     margin: 7px 0 0;
+
     color: var(--muted);
+
     font-size: 0.92rem;
 }
 
-/* Desktop gallery: three equal columns */
+
+/* Gallery grid */
+
 .photo-grid {
     display: grid;
+
     grid-template-columns: repeat(3, minmax(0, 1fr));
+
     gap: 22px;
+
     align-items: stretch;
 }
 
-/*
-   Force every photo container to have the same dimensions.
-   This prevents portrait and landscape images from creating
-   differently sized gallery cards.
-*/
+
+/* Uniform photo frames */
+
 .photo-grid .photo-item {
     position: relative;
+
     width: 100%;
+
     aspect-ratio: 4 / 5;
+
     margin: 0;
+
     overflow: hidden;
-    border-radius: 8px;
-    background: #eeeeee;
+
+    border: 1px solid var(--border);
+    border-radius: 9px;
+
+    background: var(--surface);
 }
 
-/*
-   Force every image to fill the same frame.
-   "cover" keeps the gallery uniform, but may crop some edges
-   of landscape or unusually tall images.
-*/
 .photo-grid .photo-item img {
     display: block;
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     object-position: center;
-    transition: transform 0.3s ease;
+
+    transition:
+        transform 0.35s ease,
+        filter 0.35s ease;
 }
 
-/* Subtle hover effect */
 .photo-grid .photo-item:hover img {
     transform: scale(1.035);
+    filter: brightness(1.02);
 }
 
+
 /* =========================
-   Contact page
+   Contact
    ========================= */
 
 .contact-list {
@@ -485,8 +689,11 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 24px;
+
     border-top: 1px solid var(--border);
+
     padding: 22px 0;
 }
 
@@ -502,14 +709,20 @@ p {
 
 .contact-value {
     overflow-wrap: anywhere;
+
     color: var(--muted);
+
     font-size: 0.95rem;
+
     text-align: right;
+
+    transition: color 0.2s ease;
 }
 
 .contact-value:hover {
-    color: var(--text);
+    color: var(--accent);
 }
+
 
 /* =========================
    Footer
@@ -518,6 +731,7 @@ p {
 .site-footer,
 footer {
     margin-top: 60px;
+
     border-top: 1px solid var(--border);
 }
 
@@ -525,7 +739,9 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 24px;
+
     min-height: 100px;
 }
 
@@ -545,20 +761,33 @@ footer p {
 .footer-links a {
     color: var(--muted);
     font-size: 0.82rem;
+
     transition: color 0.2s ease;
 }
 
 .footer-links a:hover {
-    color: var(--text);
+    color: var(--accent);
 }
 
+
 /* =========================
-   Tablet layout
+   Tablet
    ========================= */
 
 @media (max-width: 800px) {
+
     .container {
         width: min(calc(100% - 40px), var(--max-width));
+    }
+
+    .home-intro {
+        grid-template-columns: minmax(0, 1fr) 230px;
+        gap: 42px;
+    }
+
+    .home-photo {
+        width: 230px;
+        height: 300px;
     }
 
     .photo-grid {
@@ -576,16 +805,20 @@ footer p {
     }
 }
 
+
 /* =========================
    Smaller screens
    ========================= */
 
 @media (max-width: 700px) {
+
     .header-inner,
     header {
         align-items: flex-start;
+
         flex-direction: column;
         justify-content: center;
+
         padding: 20px 0;
     }
 
@@ -596,19 +829,32 @@ footer p {
     }
 
     .home-intro {
-        grid-template-columns: minmax(0, 1fr) 130px;
-        gap: 24px;
+        grid-template-columns: minmax(0, 1fr) 190px;
+
+        gap: 30px;
+
         align-items: start;
-        padding: 60px 0 70px;
+
+        margin-top: 0;
+
+        padding: 64px 0 72px;
+    }
+
+    .home-intro::before {
+        right: -110px;
+        width: 150px;
+        height: 150px;
     }
 
     .home-photo {
-        width: 130px;
-        height: 175px;
+        width: 190px;
+        height: 250px;
+
+        border-radius: 12px;
     }
 
     .home-text h1 {
-        font-size: 2rem;
+        font-size: 2.6rem;
     }
 
     .home-description {
@@ -617,8 +863,10 @@ footer p {
 
     .home-section {
         grid-template-columns: 1fr;
+
         gap: 22px;
-        padding: 42px 0;
+
+        padding: 44px 0;
     }
 
     .page-intro {
@@ -631,15 +879,18 @@ footer p {
 
     .timeline-item {
         grid-template-columns: 1fr;
+
         gap: 8px;
     }
 }
 
+
 /* =========================
-   Mobile layout
+   Mobile
    ========================= */
 
 @media (max-width: 520px) {
+
     .container {
         width: min(calc(100% - 32px), var(--max-width));
     }
@@ -656,23 +907,52 @@ footer p {
 
     .home-intro {
         grid-template-columns: 1fr;
-        gap: 30px;
+
+        gap: 34px;
+
+        padding: 52px 0 64px;
+    }
+
+    .home-intro::before {
+        top: 20px;
+        right: -80px;
+
+        width: 130px;
+        height: 130px;
+    }
+
+    .home-text h1 {
+        font-size: 2.35rem;
     }
 
     .home-photo {
-        width: 145px;
-        height: 190px;
+        width: 100%;
+        max-width: 300px;
+
+        height: 370px;
+
         justify-self: start;
+
+        border-radius: 12px;
     }
 
     .home-links {
-        flex-direction: column;
+        flex-direction: row;
+
         align-items: flex-start;
-        gap: 16px;
+
+        gap: 10px;
+    }
+
+    .text-link {
+        padding: 8px 13px;
+
+        font-size: 0.84rem;
     }
 
     .photo-grid {
         grid-template-columns: 1fr;
+
         gap: 24px;
     }
 
@@ -682,6 +962,7 @@ footer p {
 
     .photo-section-heading {
         margin-bottom: 22px;
+
         padding-left: 14px;
     }
 
@@ -691,7 +972,9 @@ footer p {
 
     .contact-item {
         align-items: flex-start;
+
         flex-direction: column;
+
         gap: 6px;
     }
 
@@ -701,8 +984,10 @@ footer p {
 
     .footer-inner {
         align-items: flex-start;
+
         flex-direction: column;
         justify-content: center;
+
         padding: 24px 0;
     }
 
@@ -710,3 +995,23 @@ footer p {
         justify-content: flex-start;
     }
 }
+
+
+/* =========================
+   Reduced motion
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+```
